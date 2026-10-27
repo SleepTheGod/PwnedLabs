@@ -1,3 +1,6 @@
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/0794e668-eebe-4a02-80ca-307a887c9d68" />
+
+```js
 (() => {
   if (window.__plAuto) { console.warn('[pl-auto] already running'); return; }
 
@@ -184,3 +187,5 @@
   console.info('%c[pl-auto] installed — auto-dumping after %dms idle (max %dms), plus on hide/leave',
                'color:#0a0;font-weight:bold', QUIET_MS, MAX_WAIT);
 })();
+
+```
